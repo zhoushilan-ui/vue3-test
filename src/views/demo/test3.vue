@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { getData } from "../api/index";
+import { getData } from "@/api/index";
 import { ref, onMounted } from "vue";
 export default {
   data() {

@@ -1,23 +1,59 @@
-// import Vue from 'vue'   //引入Vue
-import { createRouter } from 'vue-router'
-import Home from '@/components/HelloWorld.vue'
+import { createRouter, createWebHashHistory } from "vue-router";
+const test1 = () => import("@/views/demo/test1");
+const test6 = () => import("@/views/demo/test6");
+const index = () => import("@/views/index");
 
+import Layout from "@/layout";
+import LeftSidebar from "@/layout/components/silder";
+import TopNavbar from "@/layout/components/navbar";
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/redirect",
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: "/redirect/:path(.*)",
+        component: (resolve) => require(["@/views/redirect"], resolve),
+      },
+    ],
   },
   {
-    path: '/test',
-    name: 'Test',
-    component: () => import(/* webpackChunkName: "test" */ '@/views/test.vue')
-  }
-]
+    path: "/",
+    name: "index",
+    component: Layout,
+    redirect: "index",
+    children: [
+      {
+        path: "index",
+        name: "index",
+        components: {
+          default: index,
+          LeftSidebar,
+          TopNavbar,
+        },
+      },
+      {
+        path: "test1",
+        components: {
+          default: test1,
+          LeftSidebar,
+          TopNavbar,
+        },
+      },
+      {
+        path: "test6",
+        components: {
+          default: test6,
+          LeftSidebar,
+          TopNavbar,
+        },
+      },
+    ],
+  },
+];
 
-const router = createRouter({
-  // history: createWebHistory(process.env.BASE_URL),
-  routes
-})
-
-export default router
+export const router = createRouter({
+  history: createWebHashHistory(),
+  routes: routes,
+});

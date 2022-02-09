@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { getDemo } from "../api/index";
+import { getDemo } from "@/api/index";
 import { ref, onMounted } from "vue";
 export default {
   data() {
