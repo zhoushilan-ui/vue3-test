@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 const test1 = () => import("@/views/demo/test1");
-const test6 = () => import("@/views/demo/test6");
+// const test6 = () => import("@/views/demo/test6");
 const index = () => import("@/views/index");
-
+const login = () => import("@/views/login");
 import Layout from "@/layout";
 import LeftSidebar from "@/layout/components/silder";
 import TopNavbar from "@/layout/components/navbar";
@@ -19,6 +19,18 @@ const routes = [
     ],
   },
   {
+    path: "/login",
+    name: "login",
+    component: login,
+    hidden: true,
+    // children: [
+    //   {
+    //     path: "/redirect/:path(.*)",
+    //     component: (resolve) => require(["@/views/redirect"], resolve),
+    //   },
+    // ],
+  },
+  {
     path: "/",
     name: "index",
     component: Layout,
@@ -26,7 +38,7 @@ const routes = [
     children: [
       {
         path: "index",
-        name: "index",
+        name: "首页",
         components: {
           default: index,
           LeftSidebar,
@@ -34,7 +46,17 @@ const routes = [
         },
       },
       {
+        path: "loading",
+        name: "动画加载效果",
+        components: {
+          default: import("@/views/loading/index.vue"),
+          LeftSidebar,
+          TopNavbar,
+        },
+      },
+      {
         path: "test1",
+        name: "test1",
         components: {
           default: test1,
           LeftSidebar,
@@ -42,9 +64,10 @@ const routes = [
         },
       },
       {
-        path: "test6",
+        path: "echarts",
+        name: "图表",
         components: {
-          default: test6,
+          default: import("@/views/echarts/index.vue"),
           LeftSidebar,
           TopNavbar,
         },

@@ -1,7 +1,7 @@
 import axios from "axios";
-// import { Notification, MessageBox, Message } from "element-ui";
+import { ElMessage } from "element-plus";
 // import store from "@/store";
-import { getToken } from "@/utils/auth";
+// import { getToken } from "@/utils/auth";
 import errorCode from "@/utils/errorCode";
 
 axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
@@ -18,32 +18,35 @@ const service = axios.create({
 service.interceptors.request.use(
   (config) => {
     // 是否需要设置 token
-    const isToken = (config.headers || {}).isToken === false;
-    if (getToken() && !isToken) {
-      config.headers["Authorization"] = "Bearer " + getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
-    }
+    // const isToken = (config.headers || {}).isToken === false;
+    // if (getToken() && !isToken) {
+    //   config.headers["Authorization"] = "Bearer " + getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
+    // }
+
     // get请求映射params参数
-    if (config.method === "get" && config.params) {
-      let url = config.url + "?";
-      for (const propName of Object.keys(config.params)) {
-        const value = config.params[propName];
-        var part = encodeURIComponent(propName) + "=";
-        if (value !== null && typeof value !== "undefined") {
-          if (typeof value === "object") {
-            for (const key of Object.keys(value)) {
-              let params = propName + "[" + key + "]";
-              var subPart = encodeURIComponent(params) + "=";
-              url += subPart + encodeURIComponent(value[key]) + "&";
-            }
-          } else {
-            url += part + encodeURIComponent(value) + "&";
-          }
-        }
-      }
-      url = url.slice(0, -1);
-      config.params = {};
-      config.url = url;
-    }
+    // if (config.method === "get" && config.params) {
+
+    //   let url = config.url + "?";
+    //   for (const propName of Object.keys(config.params)) {
+    //     const value = config.params[propName];
+    //     var part = encodeURIComponent(propName) + "=";
+    //     if (value !== null && typeof value !== "undefined") {
+    //       if (typeof value === "object") {
+    //         for (const key of Object.keys(value)) {
+    //           let params = propName + "[" + key + "]";
+    //           var subPart = encodeURIComponent(params) + "=";
+    //           url += subPart + encodeURIComponent(value[key]) + "&";
+    //         }
+    //       } else {
+    //         url += part + encodeURIComponent(value) + "&";
+    //       }
+    //     }
+    //   }
+    //   url = url.slice(0, -1);
+    //   config.params = {};
+    //   config.url = url;
+    // }
+
     return config;
   },
   (error) => {
@@ -78,22 +81,21 @@ service.interceptors.response.use(
       //       //   });
       //     });
     } else if (code === 500) {
+      console.log(500);
       if (msg == "验证码错误" || msg == "验证码已失效") {
         return res.data;
       } else {
-        // Message({
-        //   message:
-        //     msg == "系*统*未*知*错*误，请*反*馈*给*管*理*员"
-        //       ? `系统网络错误，错误路径为：${res.config.url}，错误参数为：${res.config.data}，请联系管理员处理`
-        //       : msg,
-        //   type: "error",
-        // });
+        ElMessage.error({
+          message: msg,
+        });
         return Promise.reject(new Error(msg));
       }
     } else if (code !== 200) {
-      //   Notification.error({
-      //     title: msg,
-      //   });
+      ElMessage.error({
+        title: msg,
+      });
+
+      console.log(200);
       return Promise.reject("error");
     } else {
       return res.data;

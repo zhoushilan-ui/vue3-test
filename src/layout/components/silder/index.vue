@@ -1,47 +1,59 @@
 <template>
   <el-scrollbar>
     <el-menu
+      :default-active="index"
+      :unique-opened="true"
+      :collapse-transition="false"
       :router="true"
-      :default-active="activeIndex"
       active-text-color="#ffd04b"
       background-color="#545c64"
       class="el-menu-vertical-demo"
       text-color="#fff"
-    >
-      <div class="class-logo">
+      mode="vertical"
+      ><div class="class-logo">
         <el-icon><icon-menu /> vue3 + 练习 </el-icon>
         <el-avatar :src="avatar"></el-avatar>
       </div>
-      <el-menu-item index="index">
-        <el-icon><icon-menu /></el-icon>
-        <span>首页</span>
-      </el-menu-item>
-      <el-sub-menu index="2">
-        <template #title>
-          <el-icon><message /></el-icon>菜单
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="test1">Option 1</el-menu-item>
-          <el-menu-item index="test6">Option 2</el-menu-item>
-        </el-menu-item-group>
-      </el-sub-menu>
+      <div v-for="(item, i) in activeMenu.children" :key="item.path">
+        <el-menu-item :key="i" :index="item.path">
+          <i class="iconfont icons">{{ iconData[i] }}</i>
+          {{ item.name }}</el-menu-item
+        >
+      </div>
     </el-menu>
   </el-scrollbar>
 </template>
 
 <script>
 import avatar from "../../../assets/dog.jpg";
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { getIcons } from "@/api/app-icon.js";
 export default {
   data() {
     return { avatar };
   },
   setup() {
     const activeIndex = ref("index");
+    const router = useRouter();
+    const activeMenu = computed(() => {
+      const routers = router.options.routes;
+      const path = routers.find((item) => item.path == "/");
+      return path;
+    });
 
+    const iconData = ref([]);
+    const geticon = async () => {
+      let { data } = await getIcons();
+      iconData.value = data;
+    };
+    onMounted(geticon);
     return {
       activeIndex,
       avatar,
+      activeMenu,
+      geticon,
+      iconData,
     };
   },
 };
@@ -83,5 +95,9 @@ export default {
 
 .demo-type > div:not(:last-child) {
   border-right: 1px solid var(--el-border-color-base);
+}
+
+.icons {
+  margin-right: 10px;
 }
 </style>

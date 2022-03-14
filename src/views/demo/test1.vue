@@ -38,9 +38,4 @@ export default {
 };
 </script>
 
-<style>
-.pi {
-  width: 10px;
-  height: 10px;
-}
-</style>
+<style></style>
