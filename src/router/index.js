@@ -72,6 +72,15 @@ const routes = [
           TopNavbar,
         },
       },
+      {
+        path: "dHtmlx",
+        name: "甘特图",
+        components: {
+          default: import("@/views/dHtmlx/index.vue"),
+          LeftSidebar,
+          TopNavbar,
+        },
+      },
     ],
   },
 ];

@@ -25,6 +25,7 @@ const app = createApp(App);
 //引入echarts
 import * as echarts from "echarts";
 app.config.globalProperties.$echarts = echarts;
+
 app.use(ElementPlus, { size: "small", zIndex: 3000, locale: zhCn });
 app.use(router);
 // app.use(particles);
