@@ -39,6 +39,16 @@ export default {
     const activeMenu = computed(() => {
       const routers = router.options.routes;
       const path = routers.find((item) => item.path == "/");
+      //隐藏router中带有hidden 路由（或者是直接删除带有hidden的子路由）
+      path.children.forEach((item, i) => {
+        for (let iten in item) {
+          if (iten == "hidden") {
+            console.log(9999);
+            console.log(i);
+            path.children.splice(i, 1);
+          }
+        }
+      });
       return path;
     });
 

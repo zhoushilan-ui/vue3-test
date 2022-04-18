@@ -20,14 +20,18 @@ import elementIcons from "@/components/SvgIcon/svgicon";
 //main文件
 // import particles from "particles.js";
 import VueParticles from "vue-particles";
+// import Antd from "ant-design-vue";
 
+import "ant-design-vue/dist/antd.css";
 const app = createApp(App);
 //引入echarts
 import * as echarts from "echarts";
+import "echarts-gl";
 app.config.globalProperties.$echarts = echarts;
 
 app.use(ElementPlus, { size: "small", zIndex: 3000, locale: zhCn });
 app.use(router);
+// app.use(Antd);
 // app.use(particles);
 app.use(VueParticles);
 app.component("svg-icon", SvgIcon);
