@@ -99,13 +99,52 @@ const routes = [
           TopNavbar,
         },
       },
-
       {
         path: "glass",
         name: "glass",
         hidden: true,
         components: {
           default: import("@/views/css/deme/glass.vue"),
+          LeftSidebar,
+          TopNavbar,
+        },
+      },
+
+      {
+        path: "cutscreen",
+        name: "cutscreen",
+        hidden: true,
+        components: {
+          default: import("@/views/css/deme/cutscreen.vue"),
+          LeftSidebar,
+          TopNavbar,
+        },
+      },
+
+      {
+        path: "game",
+        name: "game",
+        components: {
+          default: import("@/views/game/index.vue"),
+          LeftSidebar,
+          TopNavbar,
+        },
+      },
+      {
+        path: "Virtual",
+        name: "虚拟列表",
+        components: {
+          default: import("@/views/virtualList.vue"),
+          LeftSidebar,
+          TopNavbar,
+        },
+      },
+      {
+        path: "Shadow",
+        name: "Shadow",
+        hidden: true,
+        components: {
+          default: import("@/views/css/deme/shadow.vue"),
           LeftSidebar,
           TopNavbar,
         },

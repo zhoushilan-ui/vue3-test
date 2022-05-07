@@ -111,16 +111,10 @@ function ss() {
   function example(items, index) {
     options.forEach(function (item_, index_) {
       if (index === index_) {
-        console.log(item_);
-        console.log(items);
-        figlet(items, item_, function (err, data) {
+        figlet(items, item_, function (err) {
           if (err) {
-            console.log(1);
-            console.log(err);
             return err;
           }
-          console.log(2);
-          console.log(data);
         });
       }
     });

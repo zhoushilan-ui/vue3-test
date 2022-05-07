@@ -29,14 +29,14 @@ let dataList = Mock.mock({
 export default {
   "get|/parameter/query": () => {
     return {
-      status: 200,
+      code: 200,
       message: "success",
       data: demoList,
     };
   },
   "get|/parameter/list": () => {
     return {
-      status: 200,
+      code: 200,
       message: "success",
       data: dataList,
     };

@@ -34,8 +34,8 @@
           </el-row>
         </div>
       </el-col>
-      <el-col :span="12"
-        ><div class="grid-content bg-purple-light">
+      <el-col :span="12">
+        <div class="grid-content bg-purple-light">
           <el-row>
             <el-col :span="6">
               <div class="item"></div>

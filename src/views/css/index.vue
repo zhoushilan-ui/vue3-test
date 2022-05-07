@@ -2,6 +2,8 @@
   <div>
     <p class="all-title">css 样式</p>
     <div @click="urlClick" class="css-glass">玻璃拟态</div>
+    <div @click="CutScreenClick" class="css-glass">切屏事件</div>
+    <div @click="ShadowClick" class="css-glass">css 阴影</div>
   </div>
 </template>
 
@@ -16,9 +18,18 @@ export default {
     const urlClick = () => {
       $router.push({ path: "/glass" });
     };
+    //
+    const CutScreenClick = () => {
+      $router.push({ path: "/cutscreen" });
+    };
+    const ShadowClick = () => {
+      $router.push({ path: "/Shadow" });
+    };
     return {
       //需要返回
       urlClick,
+      CutScreenClick,
+      ShadowClick,
     };
   },
 };

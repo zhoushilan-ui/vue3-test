@@ -25,7 +25,7 @@ var icon = [
 export default {
   "get|/getIcon": () => {
     return {
-      status: 200,
+      code: 200,
       message: "success",
       data: icon,
     };
